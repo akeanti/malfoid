@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" role="img" aria-labelledby="t d">
+  <title id="t">Malfoid cameo</title>
+  <desc id="d">Original artwork: a platinum-haired young aristocrat in profile, carved like an ivory cameo on emerald, in a beaded silver frame. Malfoid project, CC BY 4.0.</desc>
+  <defs>
+    <radialGradient id="bg" cx="0.45" cy="0.38" r="0.75">
+      <stop offset="0" stop-color="#17644a"/>
+      <stop offset="0.5" stop-color="#0c3c29"/>
+      <stop offset="1" stop-color="#051a10"/>
+    </radialGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.3" stop-color="#cfd6dd"/>
+      <stop offset="0.55" stop-color="#7d8995"/>
+      <stop offset="0.8" stop-color="#e6ebf0"/>
+      <stop offset="1" stop-color="#8f9ba7"/>
+    </linearGradient>
+    <linearGradient id="ivory" gradientUnits="userSpaceOnUse" x1="150" y1="110" x2="330" y2="560">
+      <stop offset="0" stop-color="#fdfaf3"/>
+      <stop offset="0.55" stop-color="#ece4d4"/>
+      <stop offset="1" stop-color="#cdc1aa"/>
+    </linearGradient>
+    <linearGradient id="cloth" gradientUnits="userSpaceOnUse" x1="80" y1="380" x2="430" y2="620">
+      <stop offset="0" stop-color="#e2d7c2"/>
+      <stop offset="0.55" stop-color="#c4b597"/>
+      <stop offset="1" stop-color="#9c8b6c"/>
+    </linearGradient>
+    <linearGradient id="platinum" gradientUnits="userSpaceOnUse" x1="190" y1="90" x2="380" y2="520">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#f6f0e2"/>
+      <stop offset="1" stop-color="#d6c8aa"/>
+    </linearGradient>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7cf5bf"/>
+      <stop offset="0.45" stop-color="#2fd38a"/>
+      <stop offset="1" stop-color="#0a5a39"/>
+    </linearGradient>
+    <filter id="relief" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="3" dy="6" stdDeviation="5" flood-color="#010a06" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <clipPath id="oval">
+      <ellipse cx="240" cy="300" rx="202" ry="262"/>
+    </clipPath>
+    <clipPath id="face">
+      <path d="M196,148 C183,163 173,186 171,203 C171,208 173,212 174,216 C169,229 157,243 149,253 C146,257 148,263 156,264 L165,266 C166,271 163,276 159,280 C161,284 164,285 167,286 C163,288 161,291 161,293 C163,297 167,299 170,301 C166,306 164,312 165,317 C167,325 173,331 182,334 C186,350 189,372 193,400 L300,400 C294,372 292,346 296,322 C306,280 304,200 284,160 C262,128 222,132 196,148 Z"/>
+    </clipPath>
+    <clipPath id="hair">
+      <path d="M188,150 C198,112 246,88 292,98 C340,108 364,156 359,214 C355,262 357,330 368,400 C374,446 383,484 370,514 C358,502 348,507 336,518 C331,502 319,497 306,502 C313,454 301,412 285,374 C275,352 263,331 257,307 C251,285 247,263 249,241 C245,225 237,207 225,193 C215,181 203,167 188,150 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- frame -->
+  <ellipse cx="240" cy="300" rx="232" ry="292" fill="url(#silver)"/>
+  <ellipse cx="240" cy="300" rx="224" ry="284" fill="#0b120e"/>
+  <ellipse cx="240" cy="300" rx="219" ry="279" fill="none" stroke="url(#silver)" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 13.94"/>
+  <ellipse cx="240" cy="300" rx="208" ry="268" fill="url(#silver)"/>
+  <ellipse cx="240" cy="300" rx="202" ry="262" fill="url(#bg)"/>
+
+  <g clip-path="url(#oval)">
+    <!-- faint guilloche rings behind the bust -->
+    <g fill="none" stroke="#2fd38a" stroke-opacity="0.07">
+      <ellipse cx="240" cy="300" rx="180" ry="236"/>
+      <ellipse cx="240" cy="300" rx="158" ry="210"/>
+      <ellipse cx="240" cy="300" rx="136" ry="184"/>
+    </g>
+
+    <g filter="url(#relief)">
+      <!-- chest visible in the neckline -->
+      <path d="M192,396 L302,396 L308,540 L184,540 Z" fill="url(#ivory)"/>
+
+      <!-- face and neck -->
+      <path fill="url(#ivory)" d="M196,148 C183,163 173,186 171,203 C171,208 173,212 174,216 C169,229 157,243 149,253 C146,257 148,263 156,264 L165,266 C166,271 163,276 159,280 C161,284 164,285 167,286 C163,288 161,291 161,293 C163,297 167,299 170,301 C166,306 164,312 165,317 C167,325 173,331 182,334 C186,350 189,372 193,400 L300,400 C294,372 292,346 296,322 C306,280 304,200 284,160 C262,128 222,132 196,148 Z"/>
+
+      <!-- cloak with a standing collar -->
+      <path fill="url(#cloth)" d="M60,620 C82,528 126,466 182,432 L198,412 C212,440 224,462 236,488 C252,460 270,434 300,410 C306,382 318,356 336,338 C344,370 348,396 354,420 C396,452 424,526 436,620 Z"/>
+
+      <!-- hair: sleek, long, swept back -->
+      <path fill="url(#platinum)" d="M188,150 C198,112 246,88 292,98 C340,108 364,156 359,214 C355,262 357,330 368,400 C374,446 383,484 370,514 C358,502 348,507 336,518 C331,502 319,497 306,502 C313,454 301,412 285,374 C275,352 263,331 257,307 C251,285 247,263 249,241 C245,225 237,207 225,193 C215,181 203,167 188,150 Z"/>
+    </g>
+
+    <!-- sculpting: soft shadows and highlights carved into the relief -->
+    <g clip-path="url(#face)">
+      <path d="M182,336 C210,341 238,330 258,305 L266,372 C240,384 208,382 186,376 Z" fill="#7f6f53" opacity="0.38" filter="url(#soft)"/>
+      <path d="M198,152 C214,164 230,190 240,218 L252,246 L236,240 C226,212 212,180 194,164 Z" fill="#7f6f53" opacity="0.16" filter="url(#soft)"/>
+      <ellipse cx="226" cy="266" rx="24" ry="11" transform="rotate(-24 226 266)" fill="#7f6f53" opacity="0.12" filter="url(#soft)"/>
+      <ellipse cx="186" cy="180" rx="7" ry="20" fill="#ffffff" opacity="0.6" filter="url(#softer)"/>
+      <ellipse cx="208" cy="246" rx="13" ry="6" transform="rotate(-18 208 246)" fill="#ffffff" opacity="0.55" filter="url(#softer)"/>
+      <ellipse cx="163" cy="238" rx="3" ry="10" transform="rotate(32 163 238)" fill="#ffffff" opacity="0.6" filter="url(#softer)"/>
+      <ellipse cx="173" cy="318" rx="6" ry="5" fill="#ffffff" opacity="0.5" filter="url(#softer)"/>
+      <path d="M163,279 C166,276 170,276 172,278" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="1.4"/>
+    </g>
+    <g clip-path="url(#hair)">
+      <path d="M249,241 C251,285 263,331 285,374 C301,412 313,454 306,502 L332,520 C340,470 322,400 300,350 C282,312 270,270 266,236 Z" fill="#8f7f60" opacity="0.32" filter="url(#soft)"/>
+      <path d="M340,120 C362,160 362,230 358,300 L372,300 L372,110 Z" fill="#8f7f60" opacity="0.22" filter="url(#soft)"/>
+      <path d="M205,128 C236,104 284,98 318,114 C290,112 250,118 214,140 Z" fill="#ffffff" opacity="0.7" filter="url(#softer)"/>
+    </g>
+
+    <!-- carved details -->
+    <g fill="none" stroke="#a89a7f" stroke-linecap="round">
+      <!-- strands -->
+      <g stroke-width="1.3" stroke-opacity="0.75">
+        <path d="M194,146 C216,122 256,110 296,114"/>
+        <path d="M201,141 C231,121 281,117 319,141"/>
+        <path d="M214,153 C246,137 292,137 328,171"/>
+        <path d="M232,177 C262,167 300,177 336,215"/>
+        <path d="M250,215 C276,215 310,241 338,287"/>
+        <path d="M262,263 C286,281 316,321 344,381"/>
+        <path d="M276,321 C300,351 330,411 352,471"/>
+        <path d="M292,381 C312,421 330,461 341,503"/>
+      </g>
+      <g stroke-width="0.9" stroke-opacity="0.45">
+        <path d="M222,165 C254,152 296,158 332,192"/>
+        <path d="M240,196 C270,192 306,210 337,250"/>
+        <path d="M256,240 C282,248 314,282 341,334"/>
+        <path d="M270,292 C294,318 322,368 348,426"/>
+        <path d="M300,140 C326,152 346,180 352,212"/>
+        <path d="M318,250 C334,300 344,360 356,430"/>
+        <path d="M300,420 C316,452 330,484 334,512"/>
+      </g>
+      <!-- brow, closed lid and lashes: unimpressed, naturally -->
+      <path d="M178,201 C187,195 199,195 210,200" stroke-width="2.2" stroke="#9d8f74"/>
+      <path d="M183,216 C189,220 197,220 204,215" stroke-width="2.2" stroke="#8f8167"/>
+      <path d="M186,218 L180,223 M191,220 L186,226 M197,220 L194,226" stroke-width="1.5" stroke="#8f8167"/>
+      <path d="M160,258 C163,261 166,261 168,258" stroke-width="1.4"/>
+      <path d="M162,286 L171,287" stroke-width="1.6"/>
+      <!-- jaw and throat shading -->
+      <path d="M182,334 C205,337 232,327 252,305" stroke-width="1.4" stroke-opacity="0.7"/>
+      <path d="M190,358 C192,372 194,386 196,398" stroke-width="1.2" stroke-opacity="0.45"/>
+      <!-- carved neckline edge -->
+      <path d="M182,432 L198,412 C212,440 224,462 236,488 C252,460 270,434 300,410" stroke="#8a7b5f" stroke-width="2" stroke-opacity="0.9"/>
+      <path d="M200,416 C213,442 225,463 236,484" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.55"/>
+      <!-- cloak folds and lapel -->
+      <path d="M198,412 C190,440 186,468 190,505" stroke-width="1.6" stroke-opacity="0.8"/>
+      <path d="M118,560 C140,512 160,478 184,454" stroke-width="1.4" stroke-opacity="0.6"/>
+      <path d="M150,590 C164,548 178,516 196,494" stroke-width="1.2" stroke-opacity="0.5"/>
+      <path d="M306,540 C330,500 346,476 364,456" stroke-width="1.4" stroke-opacity="0.6"/>
+    </g>
+
+    <!-- light catching the hair and profile -->
+    <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-opacity="0.85">
+      <path d="M208,134 C238,113 288,110 322,128" stroke-width="1.6"/>
+      <path d="M302,204 C322,246 334,304 347,384" stroke-width="1.2" stroke-opacity="0.6"/>
+      <path d="M190,160 C180,175 174,190 172,204" stroke-width="1.2" stroke-opacity="0.7"/>
+    </g>
+
+    <!-- emerald drop earring -->
+    <g>
+      <circle cx="251" cy="313" r="2.6" fill="url(#silver)"/>
+      <path d="M251,316 L251,320" stroke="#c9d1d9" stroke-width="1.4"/>
+      <circle cx="251" cy="331" r="7" fill="#2fd38a" opacity="0.5" filter="url(#glow)"/>
+      <path d="M251,319 C256,325 258,331 254,336 C252,338 250,338 248,336 C244,331 246,325 251,319 Z" fill="url(#gem)" stroke="#c9d1d9" stroke-width="0.8"/>
+      <circle cx="249.5" cy="327" r="1.3" fill="#ffffff" opacity="0.9"/>
+    </g>
+
+    <!-- serpent brooch at the neckline -->
+    <g transform="translate(236 470)">
+      <ellipse rx="11" ry="13" fill="url(#silver)"/>
+      <ellipse rx="6.5" ry="8.5" fill="url(#gem)"/>
+      <path d="M-3,-5 C2,-6 3,-1 0,0 C-3,1 -2,6 3,5" fill="none" stroke="#e8eef3" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="-2" cy="-4" r="1.1" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- top and bottom finials -->
+  <g fill="url(#silver)">
+    <path d="M240,0 L250,12 L240,22 L230,12 Z"/>
+    <path d="M240,578 L250,588 L240,600 L230,588 Z"/>
+  </g>
+</svg>

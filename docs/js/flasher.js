@@ -15,7 +15,9 @@ export function initFlasher() {
       const bin = await fetch(new URL(part, new URL(manifestUrl, location.href)), { method: "HEAD", cache: "no-store" });
       if (!bin.ok) throw new Error("missing image");
       note.textContent = `Ready: ${manifest.name}, firmware ${manifest.version}.`;
+      note.classList.add("ready");
     } catch {
+      note.classList.remove("ready");
       note.textContent = "No firmware published here yet. Push to main and the GitHub Actions workflow builds and publishes it.";
     }
   };

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/favicon.svg" width="96" height="96" alt="Malfoid logo: her signature M gesture">
+<a href="https://akeanti.xyz/malfoid/"><img src="docs/assets/og-image.png" alt="Malfoid: an ivory cameo of a platinum-haired aristocrat beside the wordmark and the tagline 'A gesture wand with a platinum attitude.'"></a>
 
 # Malfoid
 
@@ -10,11 +10,11 @@ Draw a spell in the air. An ESP32-S3 and a 6-axis IMU track the tip, an on-devic
 and your smart home obeys, with a haptic flourish and a glowing tip.
 
 [![CI](https://github.com/akeanti/malfoid/actions/workflows/ci.yml/badge.svg)](https://github.com/akeanti/malfoid/actions/workflows/ci.yml)
-[![Pages](https://github.com/akeanti/malfoid/actions/workflows/pages.yml/badge.svg)](https://akeanti.github.io/malfoid/)
+[![Pages](https://github.com/akeanti/malfoid/actions/workflows/pages.yml/badge.svg)](https://akeanti.xyz/malfoid/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2fd38a.svg)](LICENSE)
 [![Sponsor](https://img.shields.io/badge/sponsor-%E2%99%A5-db61a2.svg)](https://github.com/sponsors/akeanti)
 
-**[Website & live spellbook](https://akeanti.github.io/malfoid/)** · [Hardware](hardware/) · [Firmware](firmware/) · [Sponsor](#sponsor)
+**[Website & live spellbook](https://akeanti.xyz/malfoid/)** · [Hardware](hardware/) · [Firmware](firmware/) · [Sponsor](#sponsor)
 
 </div>
 
@@ -46,11 +46,11 @@ Spells live in [`spells/spellbook.json`](spells/spellbook.json). `python tools/g
 ## Quick start (path A: no custom PCB)
 
 1. **Parts:** Seeed XIAO ESP32S3, Adafruit LSM6DSOX + DRV2605L + MAX17048 breakouts (STEMMA QT), an 8 mm LRA, one SK6812, a small LiPo, and copper tape under a 3D-printed emerald. Full list in [`hardware/bom-path-a.csv`](hardware/bom-path-a.csv), wiring in [`hardware/README.md`](hardware/README.md#path-a-breakout-build).
-2. **Flash:** open [the website's flasher](https://akeanti.github.io/malfoid/#flash) in Chrome or Edge and click *Install*. Or from source:
+2. **Flash:** open [the website's flasher](https://akeanti.xyz/malfoid/#flash) in Chrome or Edge and click *Install*. Or from source:
    ```bash
    cd firmware && pio run -e xiao -t upload
    ```
-3. **Configure:** on the [website console](https://akeanti.github.io/malfoid/#console), click *Connect wand*, enter Wi-Fi and MQTT details, and *Save to wand*.
+3. **Configure:** on the [website console](https://akeanti.xyz/malfoid/#console), click *Connect wand*, enter Wi-Fi and MQTT details, and *Save to wand*.
 4. **Cast:** rest your thumb on the emerald, draw, release.
 
 The body is a parametric OpenSCAD model in [`mechanical/`](mechanical/).
@@ -132,8 +132,14 @@ Malfoid is free and open: firmware, hardware and website, MIT licensed. If she c
 - [ ] DRV2605L auto-calibration for the LRA
 - [ ] Two-stroke spells (e.g. M then flick)
 
+## Credits
+
+The Malfoid cameo, the wand illustrations, the crest and the icons are **original artwork made for this project**, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). No film imagery or fan art is used. Typefaces, algorithms and libraries are credited in [CREDITS.md](CREDITS.md).
+
+<p align="center"><img src="docs/assets/malfoid-cameo.png" width="200" alt="The Malfoid cameo: ivory profile on emerald in a beaded silver frame"></p>
+
 ## License
 
-MIT, see [LICENSE](LICENSE).
+Code is MIT, see [LICENSE](LICENSE). Artwork in `docs/assets/` is CC BY 4.0.
 
 Malfoid is an independent, fan-inspired project, not affiliated with or endorsed by Warner Bros. Entertainment or the Wizarding World franchise. The spell names are original Latin-flavoured inventions.

@@ -11,7 +11,7 @@ export function initConsole() {
   if (!root) return;
   const connectBtn = $("connect-btn");
   const logEl = $("log");
-  const form = $("settings-form");
+  const form = $("p-settings");
   const sky = fitCanvas($("sky-canvas"), () => drawSky());
 
   let port = null, reader = null, writer = null, readable = null;
@@ -238,7 +238,7 @@ export function initConsole() {
     if (!on) {
       for (const id of ["chip-wifi", "chip-mqtt", "chip-bat"]) chip(id, false, $(id).dataset.label || $(id).textContent);
       $("sky-readout").textContent = "not connected";
-      $("device-line").textContent = "Connect a wand to load its settings.";
+      $("device-line").textContent = "No wand connected.";
       home = null;
       trail = [];
     }

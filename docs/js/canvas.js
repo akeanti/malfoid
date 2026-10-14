@@ -128,6 +128,58 @@ export function glowStroke(ctx, pts, { color = COLORS.silverHi, glow = COLORS.si
   ctx.restore();
 }
 
+// Draws the wand as a rigid stick whose tip is at `tip` and whose handle points
+// towards `wrist` (off-canvas is fine), with silver bands, the emerald and a glowing tip.
+export function drawWand(ctx, tip, wrist, length, { glow = 26 } = {}) {
+  const dx = wrist[0] - tip[0], dy = wrist[1] - tip[1];
+  const d = Math.hypot(dx, dy) || 1;
+  const ux = dx / d, uy = dy / d;  // tip -> handle
+  const nx = -uy, ny = ux;
+  const at = (s) => [tip[0] + ux * length * s, tip[1] + uy * length * s];
+  const width = (s) => 1.3 + s * 6.2 + (s > 0.62 ? 1.6 : 0);
+
+  ctx.save();
+  ctx.beginPath();
+  for (let i = 0; i <= 24; i++) { const s = i / 24, [x, y] = at(s), r = width(s); ctx.lineTo(x + nx * r, y + ny * r); }
+  for (let i = 24; i >= 0; i--) { const s = i / 24, [x, y] = at(s), r = width(s); ctx.lineTo(x - nx * r, y - ny * r); }
+  ctx.closePath();
+  const g = ctx.createLinearGradient(...tip, ...at(1));
+  g.addColorStop(0, "#2d3732");
+  g.addColorStop(0.6, "#151b18");
+  g.addColorStop(1, "#0b0e0c");
+  ctx.fillStyle = g;
+  ctx.fill();
+  ctx.strokeStyle = "rgba(207,214,221,0.32)";
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+  for (const s of [0.6, 0.63, 0.95]) {
+    const [x, y] = at(s), r = width(s) + 0.6;
+    ctx.beginPath();
+    ctx.moveTo(x + nx * r, y + ny * r);
+    ctx.lineTo(x - nx * r, y - ny * r);
+    ctx.strokeStyle = COLORS.silver;
+    ctx.lineWidth = 2.2;
+    ctx.stroke();
+  }
+  const [gx, gy] = at(0.76);
+  ctx.beginPath();
+  ctx.ellipse(gx - nx * 2, gy - ny * 2, 3.2, 5, Math.atan2(uy, ux), 0, Math.PI * 2);
+  ctx.fillStyle = COLORS.emerald;
+  ctx.shadowColor = COLORS.emerald;
+  ctx.shadowBlur = 10;
+  ctx.fill();
+  ctx.restore();
+
+  const rg = ctx.createRadialGradient(tip[0], tip[1], 0, tip[0], tip[1], glow);
+  rg.addColorStop(0, "rgba(255,255,255,0.95)");
+  rg.addColorStop(0.25, "rgba(200,248,226,0.55)");
+  rg.addColorStop(1, "rgba(47,211,138,0)");
+  ctx.fillStyle = rg;
+  ctx.beginPath();
+  ctx.arc(tip[0], tip[1], glow, 0, Math.PI * 2);
+  ctx.fill();
+}
+
 // Returns a point at fraction t (0..1) of a polyline's length, plus the sub-path up to it.
 export function walk(pts, t) {
   let total = 0;
