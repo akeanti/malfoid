@@ -1,0 +1,11 @@
+{
+  "name": "Malfoid (Malfoid Core rev A)",
+  "version": "0.1.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [{ "path": "malfoid-core.bin", "offset": 0 }]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "malfoid",
+  "private": true,
+  "description": "Website and JS tooling for the Malfoid gesture wand. No dependencies.",
+  "type": "module",
+  "scripts": {
+    "serve": "python tools/serve_docs.py",
+    "tune": "node tools/tune_recognizer.mjs 400",
+    "test:recognizer": "node tools/tune_recognizer.mjs 300 --assert",
+    "spellbook": "python tools/gen_spellbook.py"
+  }
+}

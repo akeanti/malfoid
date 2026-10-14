@@ -1,0 +1,13 @@
+Qty,Part,Description,Notes
+1,Seeed Studio XIAO ESP32S3,"ESP32-S3, 8 MB flash, USB-C, Li-ion charger on board",The 'Sense' variant works too; camera unused
+1,Adafruit LSM6DSOX breakout (STEMMA QT),6-axis IMU,Mount flat with the X arrow pointing to the tip
+1,Adafruit DRV2605L haptic driver breakout,Haptic driver with ROM effect library,Set to LRA mode by firmware
+1,8 mm coin LRA,"Linear resonant actuator, ~2 Vrms, ~235 Hz","e.g. Jinlong G0832012; an ERM coin motor works if you call useERM() instead"
+1,Adafruit MAX17048 breakout (STEMMA QT),Li-ion fuel gauge,Battery side wired to the LiPo
+1,SK6812 mini RGB LED (single),Tip light,Or any single 'NeoPixel' on a tiny PCB
+1,LiPo 1S 400-500 mAh,Battery,Must fit the handle; JST-PH or bare leads to the XIAO BAT pads
+3,STEMMA QT / Qwiic cable 50 mm,I2C daisy chain,
+1,510 ohm resistor,Thumb pad series resistor,
+1,Copper foil tape,Thumb pad electrode,About 10 x 6 mm under the gem
+1,3 mm PMMA optical fibre (end-glow),Light pipe from LED to tip,Frost the far end with fine sandpaper
+1,3D-printed wand parts,See mechanical/,PETG body; translucent green for the gem

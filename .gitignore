@@ -1,0 +1,21 @@
+# PlatformIO
+firmware/.pio/
+.pio/
+.vscode/
+
+# Staged site (CI builds it fresh)
+_site/
+docs/firmware/*.bin
+
+# Python / Node
+__pycache__/
+*.pyc
+node_modules/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+*.swp
+
+# OpenSCAD exports
+mechanical/*.stl

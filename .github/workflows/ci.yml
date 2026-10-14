@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    name: Core tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - uses: actions/cache@v6
+        with:
+          path: ~/.platformio
+          key: pio-native-${{ runner.os }}-${{ hashFiles('firmware/platformio.ini') }}
+      - run: pip install platformio
+      - name: Spellbook outputs are up to date
+        run: python tools/gen_spellbook.py --check
+      - name: C++ unit tests (AHRS, resampling, DTW, JS parity)
+        run: pio test -d firmware -e native
+      - name: Recognizer accuracy gate (Monte-Carlo, JS twin)
+        run: node tools/tune_recognizer.mjs 300 --assert
+
+  firmware:
+    name: Firmware (${{ matrix.env }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [xiao, core]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v6
+        with:
+          path: ~/.platformio
+          key: pio-esp32-${{ runner.os }}-${{ hashFiles('firmware/platformio.ini') }}
+      - run: pip install platformio
+      - run: pio run -d firmware -e ${{ matrix.env }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: malfoid-${{ matrix.env }}
+          path: |
+            firmware/.pio/build/${{ matrix.env }}/firmware.bin
+            firmware/.pio/build/${{ matrix.env }}/bootloader.bin
+            firmware/.pio/build/${{ matrix.env }}/partitions.bin

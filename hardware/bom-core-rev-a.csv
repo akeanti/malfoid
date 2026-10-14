@@ -1,0 +1,30 @@
+Ref,Qty,Value,MPN,Package,Function
+U1,1,ESP32-S3-MINI-1-N8,ESP32-S3-MINI-1-N8,Module,"MCU, Wi-Fi/BLE, 8 MB flash"
+U2,1,LSM6DSOX,LSM6DSOXTR,LGA-14 2.5x3,6-axis IMU
+U3,1,DRV2605L,DRV2605LDGSR,VSSOP-10,Haptic driver
+U4,1,MAX17048,MAX17048G+T10,TDFN-8 2x2,Fuel gauge
+U5,1,MCP73831-2,MCP73831T-2ACI/OT,SOT-23-5,Li-ion charger 4.20 V
+U6,1,TPS63802,TPS63802DLAR,VSON-HR-10,"Buck-boost 3.3 V, 2 A"
+U7,1,USBLC6-2,USBLC6-2SC6,SOT-23-6,USB ESD protection
+U8,1,SN74LVC1T45,SN74LVC1T45DBVR,SOT-23-6,LED data level shifter
+Q1,1,DMG2305UX,DMG2305UX-7,SOT-23,Load-sharing P-FET
+Q2,1,DMG2305UX,DMG2305UX-7,SOT-23,LED rail high-side switch
+Q3,1,2N7002,2N7002,SOT-23,Gate driver for Q2
+D1,1,PMEG2010,PMEG2010AEH,SOD-123F,Load-sharing Schottky
+D2,1,SK6812MINI-E,SK6812MINI-E,3.2x2.8 reverse-mount,Tip LED (fires into the light pipe)
+D3,1,Red LED,generic,0603,Charge indicator
+J1,1,USB-C receptacle,USB4105-GF-A,SMD,Power + data
+"SW1,SW2",2,Tactile switch,generic,SMD 3x4,BOOT and RESET
+L1,1,0.47 uH,per TPS63802 datasheet,4x4,Buck-boost inductor (Isat >= 3 A)
+R1,1,2.49 k,generic,0402,MCP73831 PROG (401 mA)
+"R2,R3",2,5.1 k,generic,0402,USB-C CC sink pull-downs
+R4,1,562 k,generic,0402,TPS63802 FB top
+R5,1,100 k,generic,0402,TPS63802 FB bottom
+"R6,R7",2,2.2 k,generic,0402,I2C pull-ups
+R8,1,510,generic,0402,Thumb pad series resistor
+"R9,R10,R11",3,100 k,generic,0402,"Q1 gate pull-down, Q2 gate pull-up, Q3 gate pull-down"
+"R12,R13",2,10 k,generic,0402,"EN pull-up, ALRT pull-up"
+R14,1,1 k,generic,0402,Charge LED
+C1-C12,12,"100 nF / 1 uF / 10 uF / 22 uF",generic,0402/0603,Decoupling and bulk per datasheets
+BT1,1,14500 Li-ion 800 mAh (protected),generic,14 x 53 mm,Battery between the board and the shaft
+M1,1,8 mm coin LRA,G0832012 or equivalent,8 mm coin,Haptics

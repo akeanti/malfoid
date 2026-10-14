@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Malfoid · open-source gesture wand</title>
+  <meta name="description" content="Malfoid is an open-source ESP32-S3 gesture wand: draw a spell in the air, she recognizes it on-device and commands your smart home - with haptics, a glowing tip and a platinum attitude.">
+  <meta name="theme-color" content="#050b08">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Malfoid · open-source gesture wand">
+  <meta property="og:description" content="Draw a spell in the air. An ESP32-S3, a 6-axis IMU and an on-device recognizer do the rest.">
+  <meta property="og:url" content="https://akeanti.github.io/malfoid/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <canvas id="motes" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <a class="brand" href="#top" aria-label="Malfoid home">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="brand-silver" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#8d99a5"/>
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="62" height="62" rx="15" fill="#08140e" stroke="rgba(201,209,217,.25)"/>
+          <path d="M15 47V17l17 20 17-20v30" fill="none" stroke="url(#brand-silver)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="49" cy="47" r="3.6" fill="#2fd38a"/>
+        </svg>
+        <span>Malfoid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#spellbook">Spellbook</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#console">Console</a></li>
+        <li><a href="#flash">Flash</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="icon-btn" href="https://github.com/akeanti/malfoid" aria-label="Malfoid on GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a class="btn btn-emerald btn-sm" href="#sponsor">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6l1 1.4 1-1.4C14 6.1 15.6 5 17.6 5 21 5 23 8.4 21.6 11.7 19.5 16.4 12 21 12 21z"/></svg>
+          <span class="btn-label">Sponsor</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ================================================================ hero -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Open source · ESP32-S3 · 6-axis IMU</span>
+          <h1>Malfoid</h1>
+          <p class="tagline">A gesture wand with a platinum attitude.</p>
+          <p class="lede">
+            Draw a spell in the air. She tracks the tip 208 times a second, recognizes the shape
+            on the wand itself in about a millisecond, and tells your smart home what to do, with a haptic flourish
+            and a glowing tip. Elegant, cunning, and only slightly dramatic.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#spellbook">Try the spellbook</a>
+            <a class="btn" href="#hardware">Build your own</a>
+            <a class="btn btn-emerald" href="#sponsor">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6l1 1.4 1-1.4C14 6.1 15.6 5 17.6 5 21 5 23 8.4 21.6 11.7 19.5 16.4 12 21 12 21z"/></svg>
+              Sponsor
+            </a>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>208 Hz</b><span>motion sensing</span></div>
+            <div class="stat"><b>9</b><span>built-in spells</span></div>
+            <div class="stat"><b>~50 µA</b><span>asleep (Core, est.)</span></div>
+            <div class="stat"><b>0</b><span>clouds involved</span></div>
+          </div>
+        </div>
+        <div class="stage" aria-label="Animation: the wand drawing her signature M">
+          <canvas id="hero-canvas"></canvas>
+          <div class="stage-caption">
+            <div>Signature spell<strong id="hero-spell">Malfoid</strong></div>
+            <div style="text-align:right">her own initial,<br>drawn in the air</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ features -->
+    <section class="section" style="padding-top:24px" aria-labelledby="meet">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Meet her</span>
+          <h2 id="meet">Real engineering, <span class="silver-text">dressed for the gala.</span></h2>
+        </div>
+        <div class="features">
+          <article class="panel feature reveal">
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c3-8 5-8 7-3s4 5 6-1 3-6 5-4"/><circle cx="21" cy="9" r="1.2" fill="currentColor"/></svg></div>
+            <h3>Draws in the air</h3>
+            <p>A Madgwick AHRS tracks where the <em>tip</em> points, not raw gyro axes, so rolling your wrist mid-spell doesn't smudge the shape.</p>
+          </article>
+          <article class="panel feature reveal">
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
+            <h3>Thinks on the wand</h3>
+            <p>Dynamic time warping against spell templates, on the ESP32-S3 itself. No cloud and no training set, and you can teach her new spells in one cast.</p>
+          </article>
+          <article class="panel feature reveal">
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg></div>
+            <h3>Commands your home</h3>
+            <p>MQTT with Home Assistant discovery: every spell appears as a device trigger, so "Lumen → living-room lights" is two clicks.</p>
+          </article>
+          <article class="panel feature reveal">
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h3l2-5 3 10 3-14 3 12 2-3h4"/></svg></div>
+            <h3>Feels alive</h3>
+            <p>A linear resonant actuator on a TI DRV2605L, a light-piped tip, and deep sleep until an IMU motion interrupt notices you've picked her up.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================== spellbook -->
+    <section class="section" id="spellbook" aria-labelledby="spellbook-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">The spellbook</span>
+          <h2 id="spellbook-title">Go on. <span class="silver-text">Impress her.</span></h2>
+          <p class="lede">Draw a spell with your mouse or finger. This is the same recognizer that runs on the wand, ported line for line to JavaScript and checked against the firmware's unit tests.</p>
+        </div>
+
+        <div class="demo reveal">
+          <div class="panel draw-card">
+            <div class="draw-surface" id="draw-surface">
+              <canvas id="draw-canvas" aria-label="Drawing area: draw a spell gesture"></canvas>
+              <div class="draw-hint" id="draw-hint">
+                <div><b>Draw a spell here</b>Press, draw, release. Try an <strong>M</strong>, a circle or a flick upward.</div>
+              </div>
+            </div>
+            <div class="draw-tools">
+              <span>Tap a spell below to see how it's drawn.</span>
+              <button class="btn btn-sm" id="clear-btn" type="button">Clear</button>
+            </div>
+          </div>
+
+          <div class="panel verdict" aria-live="polite">
+            <div>
+              <div class="label">Verdict</div>
+              <div class="verdict-name" id="verdict-name">-</div>
+              <p class="verdict-effect" id="verdict-effect">Waiting for a spell.</p>
+            </div>
+            <div>
+              <div class="meter" id="meter" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Confidence"><i id="meter-fill"></i></div>
+              <div class="meter-row"><span>confidence</span><span id="meter-value">0%</span></div>
+            </div>
+            <blockquote class="sass" id="sass">Go on, then. Impress me.<cite>Malfoid</cite></blockquote>
+            <p class="runner" id="runner"></p>
+            <p class="note">The line on the meter is her acceptance threshold. She also refuses if the runner-up is within 5%: ambiguity is beneath her.</p>
+          </div>
+        </div>
+
+        <div class="spell-grid" id="spell-grid" aria-label="Built-in spells"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ pipeline -->
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">How it works</span>
+          <h2 id="how-title">From flick to <span class="silver-text">"lights on"</span></h2>
+          <p class="lede">Sensing runs in its own FreeRTOS task, woken by the IMU's data-ready interrupt. Everything else waits its turn.</p>
+        </div>
+        <div class="pipeline">
+          <div class="panel step reveal"><h3>Sense</h3><p>LSM6DSOX gyro + accelerometer, read over I²C on every data-ready pulse.</p><span class="num">208 Hz · ±2000 dps</span></div>
+          <div class="panel step reveal"><h3>Fuse</h3><p>Madgwick AHRS. Gyro bias is learned whenever she rests; the accelerometer is ignored mid-flick.</p><span class="num">β = 0.08 · 0.85–1.15 g gate</span></div>
+          <div class="panel step reveal"><h3>Project</h3><p>Tip direction becomes azimuth and elevation relative to where the cast began. Wrist roll cancels out.</p><span class="num">104 points / s</span></div>
+          <div class="panel step reveal"><h3>Resample</h3><p>32 equidistant points, centred. Lines keep their aspect ratio; shapes are squared up.</p><span class="num">32 × (x, y)</span></div>
+          <div class="panel step reveal"><h3>Match</h3><p>Dynamic time warping in a Sakoe-Chiba band against every template, with a confidence margin.</p><span class="num">~1 ms on the S3</span></div>
+          <div class="panel step reveal"><h3>Act</h3><p>Tip light, a haptic signature, and an MQTT message that Home Assistant turns into anything.</p><span class="num">device triggers</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ hardware -->
+    <section class="section" id="hardware" aria-labelledby="hw-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Hardware</span>
+          <h2 id="hw-title">Two ways to build her</h2>
+          <p class="lede">Start with breakout boards and a XIAO ESP32S3 on a free afternoon, or go all the way with the Malfoid Core: an 18 × 92 mm, 4-layer board that lives in the handle.</p>
+        </div>
+        <div class="hw-grid">
+          <figure class="panel diagram reveal" style="margin:0">
+            <svg viewBox="0 0 640 410" role="img" aria-labelledby="diag-title">
+              <title id="diag-title">Block diagram: USB-C, charger, cell and buck-boost power an ESP32-S3, which talks to the IMU, haptics, fuel gauge, tip LED and thumb pad, and reaches Home Assistant over Wi-Fi.</title>
+              <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7f8e86"/></marker>
+                <linearGradient id="mcu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123323"/><stop offset="1" stop-color="#0a1a12"/></linearGradient>
+              </defs>
+              <style>
+                .bx { fill: #0a1611; stroke: rgba(201,209,217,.22); }
+                .t { fill: #e9eeeb; font: 600 13px Inter, sans-serif; }
+                .s { fill: #7f8e86; font: 500 10.5px "JetBrains Mono", monospace; }
+                .ln { stroke: #7f8e86; stroke-width: 1.3; fill: none; }
+                .lbl { fill: #2fd38a; font: 500 10px "JetBrains Mono", monospace; }
+              </style>
+              <!-- power column -->
+              <rect class="bx" x="20" y="20" width="170" height="54" rx="10"/><text class="t" x="36" y="44">USB-C</text><text class="s" x="36" y="61">5 V · data · ESD</text>
+              <rect class="bx" x="20" y="104" width="170" height="54" rx="10"/><text class="t" x="36" y="128">MCP73831</text><text class="s" x="36" y="145">Li-ion charger, 400 mA</text>
+              <rect class="bx" x="20" y="188" width="170" height="54" rx="10"/><text class="t" x="36" y="212">14500 cell</text><text class="s" x="36" y="229">800 mAh + MAX17048</text>
+              <rect class="bx" x="20" y="272" width="170" height="54" rx="10"/><text class="t" x="36" y="296">TPS63802</text><text class="s" x="36" y="313">buck-boost → 3.3 V</text>
+              <path class="ln" d="M105 74v26" marker-end="url(#arr)"/>
+              <path class="ln" d="M105 158v26" marker-end="url(#arr)"/>
+              <path class="ln" d="M105 242v26" marker-end="url(#arr)"/>
+              <path class="ln" d="M190 299h50v-60h8" marker-end="url(#arr)"/><text class="lbl" x="200" y="290">3V3</text>
+              <path class="ln" d="M190 47h70v100" stroke-dasharray="4 4" marker-end="url(#arr)"/><text class="lbl" x="200" y="40">USB D±</text>
+              <!-- MCU -->
+              <rect x="252" y="150" width="150" height="110" rx="14" fill="url(#mcu)" stroke="#2fd38a" stroke-opacity=".7"/>
+              <text class="t" x="270" y="186" style="font-size:16px">ESP32-S3</text>
+              <text class="s" x="270" y="206">2 × 240 MHz</text>
+              <text class="s" x="270" y="222">FreeRTOS · FPU</text>
+              <text class="s" x="270" y="238">Wi-Fi · BLE 5</text>
+              <!-- peripherals -->
+              <rect class="bx" x="450" y="16" width="170" height="54" rx="10"/><text class="t" x="466" y="40">LSM6DSOX</text><text class="s" x="466" y="57">6-axis IMU · 0x6A</text>
+              <rect class="bx" x="450" y="90" width="170" height="54" rx="10"/><text class="t" x="466" y="114">DRV2605L → LRA</text><text class="s" x="466" y="131">haptics · 0x5A</text>
+              <rect class="bx" x="450" y="164" width="170" height="54" rx="10"/><text class="t" x="466" y="188">MAX17048</text><text class="s" x="466" y="205">fuel gauge · 0x36</text>
+              <rect class="bx" x="450" y="238" width="170" height="54" rx="10"/><text class="t" x="466" y="262">SK6812 tip</text><text class="s" x="466" y="279">light pipe · gated</text>
+              <rect class="bx" x="450" y="312" width="170" height="54" rx="10"/><text class="t" x="466" y="336">Thumb pad</text><text class="s" x="466" y="353">capacitive · gem</text>
+              <path class="ln" d="M402 170h22V43h22" marker-end="url(#arr)"/><text class="lbl" x="408" y="34">I²C + INT1</text>
+              <path class="ln" d="M424 117h22" marker-end="url(#arr)"/>
+              <path class="ln" d="M424 191h22" marker-end="url(#arr)"/>
+              <path class="ln" d="M402 235h20v30h24" marker-end="url(#arr)"/><text class="lbl" x="410" y="230">RMT</text>
+              <path class="ln" d="M446 339h-36v-89h-8" marker-end="url(#arr)"/><text class="lbl" x="406" y="322">TOUCH</text>
+              <!-- network -->
+              <rect class="bx" x="252" y="320" width="150" height="62" rx="10" stroke-dasharray="4 4"/><text class="t" x="268" y="344">Home Assistant</text><text class="s" x="268" y="362">MQTT discovery</text>
+              <path class="ln" d="M327 260v56" stroke-dasharray="3 4" marker-end="url(#arr)"/><text class="lbl" x="334" y="292">Wi-Fi</text>
+            </svg>
+          </figure>
+
+          <div class="paths">
+            <article class="panel path reveal">
+              <span class="tag">Path A · afternoon build</span>
+              <h3>XIAO + breakouts</h3>
+              <p>Seeed XIAO ESP32S3, STEMMA QT breakouts for the IMU, haptics and gauge, one SK6812, and copper tape under a 3D-printed emerald. No SMD soldering.</p>
+              <table class="spec">
+                <tr><th>Firmware</th><td><code>pio run -e xiao</code></td></tr>
+                <tr><th>Battery</th><td>1S LiPo, 400–500 mAh</td></tr>
+                <tr><th>Asleep</th><td>~1–3 mA (cut breakout LEDs: ~0.3 mA)</td></tr>
+              </table>
+            </article>
+            <article class="panel path reveal">
+              <span class="tag">Path B · the real thing</span>
+              <h3>Malfoid Core rev A</h3>
+              <p>ESP32-S3-MINI-1, USB-C with load-sharing charger, TPS63802 buck-boost, a power-gated tip LED behind a level shifter, and the IMU near the wrist pivot.</p>
+              <table class="spec">
+                <tr><th>Firmware</th><td><code>pio run -e core</code></td></tr>
+                <tr><th>Battery</th><td>14500 Li-ion, 800 mAh</td></tr>
+                <tr><th>Asleep</th><td>~40–60 µA estimated, ~9 weeks of typical use</td></tr>
+              </table>
+            </article>
+            <div class="links-row reveal">
+              <a class="btn btn-sm" href="https://github.com/akeanti/malfoid/tree/main/hardware">Design notes</a>
+              <a class="btn btn-sm" href="https://github.com/akeanti/malfoid/blob/main/hardware/power-budget.md">Power budget</a>
+              <a class="btn btn-sm" href="https://github.com/akeanti/malfoid/tree/main/mechanical">3D-printable body</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= console -->
+    <section class="section" id="console" aria-labelledby="console-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Wand console</span>
+          <h2 id="console-title">Talk to her over USB</h2>
+          <p class="lede">Plug in the wand and connect from this page. Watch the tip move live, read every cast, set up Wi-Fi and MQTT, and teach her your own spells. Everything goes straight over USB; nothing leaves your browser.</p>
+        </div>
+
+        <div class="console offline" id="console-root">
+          <div class="panel console-main reveal">
+            <div class="console-bar">
+              <div class="chips">
+                <span class="chip" id="chip-usb">USB</span>
+                <span class="chip" id="chip-wifi">Wi-Fi</span>
+                <span class="chip" id="chip-mqtt">MQTT</span>
+                <span class="chip" id="chip-bat">Battery</span>
+              </div>
+              <button class="btn btn-primary btn-sm" id="connect-btn" type="button">Connect wand</button>
+            </div>
+            <div class="unsupported" id="serial-unsupported" hidden>Your browser can't open serial ports. Use Chrome, Edge or Opera on a desktop to connect the wand.</div>
+            <div class="sky">
+              <canvas id="sky-canvas" aria-label="Live view of where the wand tip points"></canvas>
+              <div class="sky-readout" id="sky-readout">not connected</div>
+              <div class="sky-cast"><b id="sky-cast-name"></b><span id="sky-cast-detail"></span></div>
+            </div>
+            <pre class="log" id="log" aria-live="polite" aria-label="Console log"></pre>
+          </div>
+
+          <div class="console-side">
+            <form class="panel form-card reveal" id="settings-form" data-needs-device>
+              <h3>Settings</h3>
+              <p class="hint" id="device-line">Connect a wand to load its settings.</p>
+              <div class="fields">
+                <label class="field">Name<input name="name" maxlength="23" autocomplete="off"></label>
+                <label class="field">Cast with
+                  <select name="trigger"><option value="grip">thumb on the emerald</option><option value="motion">motion only</option></select>
+                </label>
+                <label class="field">Wi-Fi network<input name="wifi_ssid" maxlength="32" autocomplete="off"></label>
+                <label class="field">Wi-Fi password<input name="wifi_pass" type="password" maxlength="64" autocomplete="new-password"></label>
+                <label class="field">MQTT host<input name="mqtt_host" maxlength="63" placeholder="homeassistant.local" autocomplete="off"></label>
+                <label class="field">MQTT port<input name="mqtt_port" type="number" min="1" max="65535" placeholder="1883"></label>
+                <label class="field">MQTT user<input name="mqtt_user" maxlength="32" autocomplete="off"></label>
+                <label class="field">MQTT password<input name="mqtt_pass" type="password" maxlength="64" autocomplete="new-password"></label>
+                <label class="field">Sleep after (s)<input name="sleep_after" type="number" min="30" max="3600"></label>
+                <label class="field">Strictness<input name="accept" type="number" min="0.3" max="0.95" step="0.05"></label>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary btn-sm" type="submit">Save to wand</button>
+                <span class="hint" style="margin:0">Leave a password blank to keep it.</span>
+              </div>
+            </form>
+
+            <div class="panel form-card reveal" data-needs-device>
+              <h3>Teach her a spell</h3>
+              <p class="hint">Name it, press record, then cast once. Recording under an existing name (like <em>lumen</em>) adds your handwriting as an extra template for that spell.</p>
+              <form class="form-actions" id="record-form" style="margin-top:0">
+                <label class="field" style="flex:1;min-width:160px">Spell name<input name="name" maxlength="23" placeholder="Accio" required autocomplete="off"></label>
+                <button class="btn btn-emerald btn-sm" type="submit" style="align-self:end">Record next cast</button>
+              </form>
+              <ul class="custom-list" id="custom-list"><li class="empty">No recorded spells yet.</li></ul>
+              <div class="form-actions">
+                <label class="field" style="flex:1;min-width:160px">Preview a spell<select id="test-select"></select></label>
+                <button class="btn btn-sm" id="test-btn" type="button" style="align-self:end">Play</button>
+                <button class="btn btn-sm" id="sleep-btn" type="button" style="align-self:end">Sleep</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================== flash -->
+    <section class="section" id="flash" aria-labelledby="flash-title">
+      <div class="wrap flash">
+        <div class="section-head reveal" style="margin:0">
+          <span class="eyebrow">Flash from the browser</span>
+          <h2 id="flash-title">No toolchain. <span class="silver-text">One click.</span></h2>
+          <p class="lede">Every push to <code>main</code> is built by GitHub Actions and published right here. Plug the board in over USB-C, choose your build, press install.</p>
+          <ol class="steps-list">
+            <li>Connect the XIAO or Core board with a data-capable USB-C cable.</li>
+            <li>Click install and pick the serial port.</li>
+            <li>Scroll up to the console to set up Wi-Fi and MQTT.</li>
+          </ol>
+        </div>
+        <div class="panel flash-card reveal">
+          <div class="seg" role="radiogroup" aria-label="Board">
+            <label><input type="radio" name="board" value="xiao" checked><span>XIAO ESP32S3</span></label>
+            <label><input type="radio" name="board" value="core"><span>Malfoid Core</span></label>
+          </div>
+          <esp-web-install-button id="installer" manifest="firmware/manifest-xiao.json">
+            <button slot="activate" class="btn btn-primary">Install Malfoid firmware</button>
+            <span slot="unsupported" class="unsupported" style="display:block">Browser flashing needs Chrome or Edge on a desktop.</span>
+            <span slot="not-allowed" class="unsupported" style="display:block">Browser flashing needs this page to be served over HTTPS.</span>
+          </esp-web-install-button>
+          <p class="fw-note" id="fw-note">Checking for published firmware…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= sponsor -->
+    <section class="section sponsor" id="sponsor" aria-labelledby="sponsor-title">
+      <div class="wrap">
+        <div class="panel sponsor-hero reveal">
+          <div>
+            <span class="eyebrow">Sponsor</span>
+            <h2 id="sponsor-title">Keep her in <span class="silver-text">silver.</span></h2>
+            <p>Malfoid is free and open: firmware, hardware and this site, MIT licensed. Sponsorship pays for PCB revisions, actuator samples and the test gear that makes the next version better. She has expensive taste, and so does good hardware.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://github.com/sponsors/akeanti">
+                <svg viewBox="0 0 24 24" fill="#db61a2" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C1 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.6l1 1.4 1-1.4C14 6.1 15.6 5 17.6 5 21 5 23 8.4 21.6 11.7 19.5 16.4 12 21 12 21z"/></svg>
+                Sponsor on GitHub
+              </a>
+              <a class="btn" href="https://github.com/akeanti/malfoid">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg>
+                Star the repo
+              </a>
+            </div>
+          </div>
+          <div class="tiers">
+            <div class="tier"><div class="price">$3<small> / month</small></div><b>Hawthorn</b><p>Your name in SPONSORS.md and her grudging respect.</p></div>
+            <div class="tier"><div class="price">$10<small> / month</small></div><b>Sterling</b><p>Vote on the next spell, plus early firmware builds.</p></div>
+            <div class="tier featured"><div class="price">$25<small> / month</small></div><b>Emerald</b><p>Your initials on the next PCB revision's silkscreen.</p></div>
+            <div class="tier"><div class="price">$100<small> / month</small></div><b>The Manor</b><p>Logo on this page and a say in the hardware roadmap.</p></div>
+          </div>
+        </div>
+        <div class="fund-uses">
+          <div class="panel reveal"><b>PCB revisions</b>Each Core spin is fab, assembly and a weekend of bring-up.</div>
+          <div class="panel reveal"><b>Actuators &amp; sensors</b>Sampling LRAs and IMUs to find the crispest haptics and lowest drift.</div>
+          <div class="panel reveal"><b>Measurement</b>A proper current profiler turns sleep-current estimates into real numbers.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <strong style="font:600 italic 1.3rem var(--serif);color:var(--silver)">Malfoid</strong>
+        <p>MIT licensed. Built with an ESP32-S3 and an unreasonable amount of attitude.</p>
+        <p>An independent, fan-inspired project, not affiliated with or endorsed by Warner Bros. Entertainment or the Wizarding World franchise. Spell names are original Latin-flavoured inventions.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="https://github.com/akeanti/malfoid">GitHub</a>
+        <a href="https://github.com/akeanti/malfoid/tree/main/firmware">Firmware</a>
+        <a href="https://github.com/akeanti/malfoid/tree/main/hardware">Hardware</a>
+        <a href="https://github.com/sponsors/akeanti">Sponsor</a>
+      </nav>
+    </div>
+  </footer>
+
+  <noscript><p class="wrap" style="color:var(--gold)">The spellbook, console and animations need JavaScript. The rest of the page works without it.</p></noscript>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10.4.0/dist/web/install-button.js?module"></script>
+</body>
+</html>
